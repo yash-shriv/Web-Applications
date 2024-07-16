@@ -1,9 +1,7 @@
 .env
 db.sqlite3
-/staticfiles/
 /media/
 __pycache__/
-static/
 *.log
 .vscode/
 *.swp
