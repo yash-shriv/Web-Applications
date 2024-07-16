@@ -1,0 +1,90 @@
+<!-- Reference: https://www.vegrecipesofindia.com/recipes/dal-recipes-indian-curries/ -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Form for adding recipes -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="recipeName" class="form-label">Recipe name</label>
+            {{ form.receipe_name }}
+        </div>
+        <div class="mb-3">
+            <label for="recipeDescription" class="form-label">Recipe description</label>
+            {{ form.receipe_description }}
+        </div>
+        <div class="mb-3">
+            <label for="recipeImage" class="form-label">Recipe Image</label>
+            {{ form.receipe_image }}
+        </div>
+        <button type="submit" class="btn btn-success">Add Recipe</button>
+    </form>
+
+    <!-- Search Bar -->
+    <div class="my-4">
+        <form method="get" class="d-flex justify-content-center">
+            <input type="text" name="search" class="form-control" value="{{ search_query }}" placeholder="Search recipes...">
+            <button type="submit" class="btn btn-primary ml-2">Search</button>
+        </form>
+    </div>
+
+    <!-- Search Bar
+    <div class="search-bar mt-5 mb-5 text-center">
+        <form method="get" action="{% url 'receipes' %}">
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" placeholder="Search recipes...">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div> -->
+
+    <!-- Recipe Grid Layout -->
+    <div class="row">
+        {% for receipe in receipes %}
+            <div class="col-md-4 mb-4">
+                <div class="recipe-card">
+                    <img src="{{ receipe.receipe_image.url }}" alt="{{ receipe.receipe_name }}" class="img-fluid">
+                    <h4>{{ receipe.receipe_name }}</h4>
+                    <p>{{ receipe.receipe_description }}</p>
+                    <a href="{% url 'edit_recipe' receipe.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'delete_recipe' receipe.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this recipe?');">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Custom CSS for styling -->
+<style>
+    .recipe-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        background-color: #f9f9f9;
+        text-align: center;
+        height: 100%;
+    }
+    .recipe-card img {
+        border-radius: 4px;
+        max-width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    .recipe-card h4 {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+    .recipe-card p {
+        font-size: 14px;
+    }
+    .search-bar {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+</style>
+{% endblock %}
