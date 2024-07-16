@@ -1,0 +1,15 @@
+.env
+db.sqlite3
+/staticfiles/
+/media/
+__pycache__/
+static/
+*.log
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+venv/
+.venv/
