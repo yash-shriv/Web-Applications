@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-iba+ed-m&h9o=07=nho3(f1omijrtf^d51#$qufrlq0%0cs7m-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Media files (Uploaded by users)
 MEDIA_URL = '/media/'
